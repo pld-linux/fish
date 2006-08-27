@@ -9,8 +9,6 @@ Source0:	http://roo.no-ip.org/fish/files/%{version}/%{name}-%{version}.tar.bz2
 # Source0-md5:	089cb13572deeac26c7d217ad75384e7
 Patch0:		%{name}-Makefile.patch
 URL:		http://roo.no-ip.org/fish/
-BuildRequires:	autoconf
-BuildRequires:	automake
 BuildRequires:	doxygen
 BuildRequires:	ncurses-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -45,8 +43,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc INSTALL README
-%doc %{_docdir}/%{name}/*
+%doc README
+%doc %{_docdir}/%{name}
 %attr(755,root,root) %{_bindir}/*
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish_inputrc
+%dir %{_sysconfdir}/fish.d
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish.d/*.fish
 %{_mandir}/man1/*.1*
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*
