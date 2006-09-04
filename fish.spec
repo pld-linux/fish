@@ -1,13 +1,12 @@
 Summary:	fish - A friendly interactive shell
 Summary(pl):	fish - przyjazna interaktywna pow³oka
 Name:		fish
-Version:	1.6
+Version:	1.21.12
 Release:	1
 License:	GPL
 Group:		Applications/Shells
 Source0:	http://roo.no-ip.org/fish/files/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	089cb13572deeac26c7d217ad75384e7
-Patch0:		%{name}-Makefile.patch
+# Source0-md5:	77fb4fd2ff5043acf6935f079250ba60
 URL:		http://roo.no-ip.org/fish/
 BuildRequires:	doxygen
 BuildRequires:	ncurses-devel
@@ -25,7 +24,6 @@ nie jest zgodna z innymi jêzykami pow³oki.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 CFLAGS="-I /usr/include/ncurses"
@@ -38,16 +36,18 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%find_lang %{name}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc README
 %doc %{_docdir}/%{name}
 %attr(755,root,root) %{_bindir}/*
+%{_datadir}/%{name}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish_inputrc
-%dir %{_sysconfdir}/fish.d
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish.d/*.fish
 %{_mandir}/man1/*.1*
