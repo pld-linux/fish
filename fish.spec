@@ -27,7 +27,8 @@ nie jest zgodna z innymi jêzykami pow³oki.
 
 %build
 CFLAGS="-I/usr/include/ncurses"
-%configure LIBS="-ltinfo"
+%configure \
+	LIBS="-ltinfo"
 %{__make}
 
 %install
