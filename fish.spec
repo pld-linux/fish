@@ -1,5 +1,5 @@
 Summary:	fish - A friendly interactive shell
-Summary(pl):	fish - przyjazna interaktywna pow³oka
+Summary(pl.UTF-8):   fish - przyjazna interaktywna powÅ‚oka
 Name:		fish
 Version:	1.22.1
 Release:	1
@@ -17,10 +17,10 @@ fish is a shell geared towards interactive use. Its features are
 focused on user friendlieness and discoverability. The language syntax
 is simple but incompatible with other shell languages.
 
-%description -l pl
-fish jest pow³ok± nastawion± na interaktywne u¿ywanie. Jego cech± jest
-przyjazne nastawienie dla u¿ytkownika. Sk³adnia jêzyka jest prosta ale
-nie jest zgodna z innymi jêzykami pow³oki.
+%description -l pl.UTF-8
+fish jest powÅ‚okÄ… nastawionÄ… na interaktywne uÅ¼ywanie. Jego cechÄ… jest
+przyjazne nastawienie dla uÅ¼ytkownika. SkÅ‚adnia jÄ™zyka jest prosta ale
+nie jest zgodna z innymi jÄ™zykami powÅ‚oki.
 
 %prep
 %setup -q
