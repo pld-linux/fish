@@ -1,5 +1,5 @@
 Summary:	fish - A friendly interactive shell
-Summary(pl.UTF-8):   fish - przyjazna interaktywna powłoka
+Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
 Version:	1.22.1
 Release:	1
