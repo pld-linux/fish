@@ -7,6 +7,7 @@ License:	GPL
 Group:		Applications/Shells
 Source0:	http://www.fishshell.org/files/%{version}/%{name}-%{version}.tar.bz2
 # Source0-md5:	016a5944861ea48e363521c240834415
+Patch0:		%{name}-link.patch
 URL:		http://fishshell.org/
 BuildRequires:	autoconf
 BuildRequires:	doxygen
@@ -28,13 +29,14 @@ nie jest zgodna z innymi językami powłoki.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 CFLAGS="-I/usr/include/ncurses"
 %{__autoconf}
 %{__autoheader}
 %configure \
-	LIBS="-ltinfo"
+	--docdir=/docs
 %{__make}
 
 %install
@@ -42,6 +44,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+mv -f $RPM_BUILD_ROOT/docs docs
 
 %find_lang %{name}
 
@@ -50,14 +53,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc README
-%doc %{_docdir}/ChangeLog
-%doc %{_docdir}/*.css
-%doc %{_docdir}/*.html
-%doc %{_docdir}/*.png
-%doc %{_docdir}/*.gif
-
+%doc README docs/*
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/%{name}
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish
+%dir %{_sysconfdir}/fish
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish/config.fish
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish/fish_inputrc
 %{_mandir}/man1/*.1*
