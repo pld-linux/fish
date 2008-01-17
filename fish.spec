@@ -1,12 +1,12 @@
 Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
-Version:	1.22.3
+Version:	1.23.0
 Release:	1
 License:	GPL
 Group:		Applications/Shells
 Source0:	http://www.fishshell.org/files/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	016a5944861ea48e363521c240834415
+# Source0-md5:	aa2f09bb54652b16bf4f7708848a7416
 Patch0:		%{name}-link.patch
 URL:		http://fishshell.org/
 BuildRequires:	autoconf
@@ -58,5 +58,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}
 %dir %{_sysconfdir}/fish
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish/config.fish
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish/fish_inputrc
+#%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish/fish_inputrc
 %{_mandir}/man1/*.1*
