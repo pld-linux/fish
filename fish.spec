@@ -32,9 +32,9 @@ nie jest zgodna z innymi językami powłoki.
 %patch0 -p1
 
 %build
-CFLAGS="-I/usr/include/ncurses"
 %{__autoconf}
 %{__autoheader}
+CPPFLAGS="-I/usr/include/ncurses"
 %configure \
 	--docdir=/docs
 %{__make}
