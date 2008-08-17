@@ -1,0 +1,11 @@
+--- fish-1.23.0/exec.c~	2008-01-13 02:47:44.000000000 +0100
++++ fish-1.23.0/exec.c	2008-08-17 16:32:08.834622002 +0200
+@@ -17,7 +17,7 @@
+ #include <errno.h>
+ #include <wchar.h>
+ #include <string.h>
+-#include <limits.h>
++#include <linux/limits.h>
+ #include <signal.h>
+ #include <sys/wait.h>
+ #include <assert.h>
