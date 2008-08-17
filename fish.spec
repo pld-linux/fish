@@ -8,6 +8,8 @@ Group:		Applications/Shells
 Source0:	http://www.fishshell.org/files/%{version}/%{name}-%{version}.tar.bz2
 # Source0-md5:	aa2f09bb54652b16bf4f7708848a7416
 Patch0:		%{name}-link.patch
+Patch1:		%{name}-ac.patch
+Patch2:		%{name}-includes.patch
 URL:		http://fishshell.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	doxygen
@@ -30,6 +32,8 @@ nie jest zgodna z innymi językami powłoki.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 %{__autoconf}
