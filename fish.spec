@@ -1,16 +1,15 @@
 Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
-Version:	1.23.0
+Version:	1.23.1
 Release:	1
 License:	GPL v2
 Group:		Applications/Shells
-Source0:	http://www.fishshell.org/files/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	aa2f09bb54652b16bf4f7708848a7416
+Source0:	http://www.fishshell.com/files/%{version}/%{name}-%{version}.tar.bz2
+# Source0-md5:	ead6b7c6cdb21f35a3d4aa1d5fa596f1
 Patch0:		%{name}-link.patch
-Patch1:		%{name}-ac.patch
-Patch2:		%{name}-includes.patch
-URL:		http://fishshell.org/
+Patch1:		%{name}-includes.patch
+URL:		http://fishshell.com/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	doxygen
 BuildRequires:	gettext-devel
@@ -33,23 +32,22 @@ nie jest zgodna z innymi językami powłoki.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 %{__autoconf}
 %{__autoheader}
 CPPFLAGS="-I/usr/include/ncurses"
+
 %configure \
-	--docdir=/docs \
+	--docdir=%{_docdir}/%{name}-%{version} \
 	--without-xsel
+
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-mv -f $RPM_BUILD_ROOT/docs docs
 
 %find_lang %{name}
 
@@ -58,7 +56,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc ChangeLog README docs/*.{html,css,png}
+%doc ChangeLog README user_doc/html/*.{html,css,png}
 %attr(755,root,root) %{_bindir}/fish*
 %attr(755,root,root) %{_bindir}/mimedb
 %attr(755,root,root) %{_bindir}/set_color
