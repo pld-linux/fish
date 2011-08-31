@@ -2,7 +2,7 @@ Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
 Version:	1.23.1
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Shells
 Source0:	http://www.fishshell.com/files/%{version}/%{name}-%{version}.tar.bz2
