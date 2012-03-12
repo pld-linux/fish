@@ -2,7 +2,7 @@ Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
 Version:	1.23.1
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Applications/Shells
 Source0:	http://www.fishshell.com/files/%{version}/%{name}-%{version}.tar.bz2
@@ -14,7 +14,7 @@ BuildRequires:	autoconf >= 2.50
 BuildRequires:	doxygen
 BuildRequires:	gettext-devel
 BuildRequires:	ncurses-devel
-Requires:	man-whatis
+Requires:	man-db
 Suggests:	xsel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
