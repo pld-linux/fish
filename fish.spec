@@ -8,12 +8,11 @@ Group:		Applications/Shells
 Source0:	http://fishshell.com/files/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	0251e6e5f25d1f326e071425ea1dee22
 URL:		http://fishshell.com/
-BuildRequires:	autoconf >= 2.50
+BuildRequires:	autoconf >= 2.60
 BuildRequires:	doxygen
 BuildRequires:	gettext-devel
 BuildRequires:	ncurses-devel
-Requires:	man-db
-Suggests:	xsel
+Suggests:	python
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -69,7 +68,22 @@ fi
 %doc CHANGELOG README.md user_doc/html/*.{html,css,png}
 %attr(755,root,root) %{_bindir}/fish*
 %attr(755,root,root) %{_bindir}/mimedb
-%{_datadir}/%{name}
+%dir %{_datadir}/%{name}
+%{_datadir}/%{name}/config.fish
+%dir %{_datadir}/%{name}/completions
+%{_datadir}/%{name}/completions/*.fish
+%dir %{_datadir}/%{name}/functions
+%{_datadir}/%{name}/functions/*.fish
+%{_datadir}/%{name}/man
+%dir %{_datadir}/%{name}/tools
+%attr(755,root,root) %{_datadir}/%{name}/tools/create_manpage_completions.py
+%{_datadir}/%{name}/tools/deroff.py
+%dir %{_datadir}/%{name}/tools/web_config
+%{_datadir}/%{name}/tools/web_config/delete.png
+%{_datadir}/%{name}/tools/web_config/index.html
+%{_datadir}/%{name}/tools/web_config/jquery.js
+%{_datadir}/%{name}/tools/web_config/sample_prompts
+%attr(755,root,root) %{_datadir}/%{name}/tools/web_config/webconfig.py
 %dir %{_sysconfdir}/fish
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish/config.fish
 %{_mandir}/man1/fish*.1*
