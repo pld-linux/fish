@@ -1,14 +1,12 @@
 Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
-Version:	1.23.1
-Release:	3
+Version:	2.1.1
+Release:	1
 License:	GPL v2
 Group:		Applications/Shells
-Source0:	http://www.fishshell.com/files/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	ead6b7c6cdb21f35a3d4aa1d5fa596f1
-Patch0:		%{name}-link.patch
-Patch1:		%{name}-includes.patch
+Source0:	http://fishshell.com/files/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	0251e6e5f25d1f326e071425ea1dee22
 URL:		http://fishshell.com/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	doxygen
@@ -30,17 +28,12 @@ nie jest zgodna z innymi językami powłoki.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
 
 %build
+%{__aclocal}
 %{__autoconf}
 %{__autoheader}
-CPPFLAGS="-I/usr/include/ncurses"
-
-%configure \
-	--docdir=%{_docdir}/%{name}-%{version} \
-	--without-xsel
+%configure
 
 %{__make}
 
@@ -49,20 +42,35 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}
+
 %find_lang %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post
+umask 022
+if [ ! -f /etc/shells ]; then
+        echo "%{_bindir}/fish" >> /etc/shells
+else
+        grep -q '^%{_bindir}/fish$' /etc/shells || echo "%{_bindir}/fish" >> /etc/shells
+fi
+
+%preun
+if [ "$1" = "0" ]; then
+        umask 022
+        grep -v '^%{_bindir}/fish$' /etc/shells > /etc/shells.new
+        mv -f /etc/shells.new /etc/shells
+fi
+
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc ChangeLog README user_doc/html/*.{html,css,png}
+%doc CHANGELOG README.md user_doc/html/*.{html,css,png}
 %attr(755,root,root) %{_bindir}/fish*
 %attr(755,root,root) %{_bindir}/mimedb
-%attr(755,root,root) %{_bindir}/set_color
 %{_datadir}/%{name}
 %dir %{_sysconfdir}/fish
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish/config.fish
 %{_mandir}/man1/fish*.1*
 %{_mandir}/man1/mimedb.1*
-%{_mandir}/man1/set_color.1*
