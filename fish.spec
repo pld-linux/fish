@@ -10,7 +10,7 @@ Source0:	http://fishshell.com/files/%{version}/%{name}-%{version}.tar.gz
 URL:		http://fishshell.com/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	doxygen
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	ncurses-devel
 Suggests:	python
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
