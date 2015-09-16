@@ -1,12 +1,12 @@
 Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
-Version:	2.1.1
-Release:	2
+Version:	2.2.0
+Release:	1
 License:	GPL v2
 Group:		Applications/Shells
 Source0:	http://fishshell.com/files/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	0251e6e5f25d1f326e071425ea1dee22
+# Source0-md5:	f6c3d940148593ff6648adb07986cbcb
 URL:		http://fishshell.com/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	doxygen
@@ -65,12 +65,13 @@ fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc CHANGELOG README.md user_doc/html/*.{html,css,png}
+%doc README.md user_doc/html/*.{html,css,png}
 %attr(755,root,root) %{_bindir}/fish*
 %attr(755,root,root) %{_bindir}/mimedb
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/config.fish
 %dir %{_datadir}/%{name}/completions
+%{_datadir}/%{name}/completions/..fish
 %{_datadir}/%{name}/completions/*.fish
 %dir %{_datadir}/%{name}/functions
 %{_datadir}/%{name}/functions/*.fish
@@ -80,8 +81,10 @@ fi
 %{_datadir}/%{name}/tools/deroff.py
 %dir %{_datadir}/%{name}/tools/web_config
 %{_datadir}/%{name}/tools/web_config/delete.png
+%{_datadir}/%{name}/tools/web_config/fishconfig.css
 %{_datadir}/%{name}/tools/web_config/index.html
-%{_datadir}/%{name}/tools/web_config/jquery.js
+%{_datadir}/%{name}/tools/web_config/js
+%{_datadir}/%{name}/tools/web_config/partials
 %{_datadir}/%{name}/tools/web_config/sample_prompts
 %attr(755,root,root) %{_datadir}/%{name}/tools/web_config/webconfig.py
 %dir %{_sysconfdir}/fish
