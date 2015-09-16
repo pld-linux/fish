@@ -12,6 +12,7 @@ BuildRequires:	autoconf >= 2.60
 BuildRequires:	doxygen
 BuildRequires:	gettext-tools
 BuildRequires:	ncurses-devel
+BuildRequires:	rpmbuild(macros) >= 1.462
 Suggests:	python
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
