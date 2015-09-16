@@ -48,20 +48,13 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-umask 022
-if [ ! -f /etc/shells ]; then
-        echo "%{_bindir}/fish" >> /etc/shells
-else
-        grep -q '^%{_bindir}/fish$' /etc/shells || echo "%{_bindir}/fish" >> /etc/shells
-fi
+%post -p <lua>
+%lua_add_etc_shells %{_bindir}/fish
 
-%preun
-if [ "$1" = "0" ]; then
-        umask 022
-        grep -v '^%{_bindir}/fish$' /etc/shells > /etc/shells.new
-        mv -f /etc/shells.new /etc/shells
-fi
+%preun -p <lua>
+if arg[2] == 0 then
+	%lua_remove_etc_shells %{_bindir}/fish
+end
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
