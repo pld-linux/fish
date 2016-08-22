@@ -1,12 +1,12 @@
 Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
-Version:	2.2.0
-Release:	2
+Version:	2.3.1
+Release:	1
 License:	GPL v2
 Group:		Applications/Shells
 Source0:	http://fishshell.com/files/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	f6c3d940148593ff6648adb07986cbcb
+# Source0-md5:	2d13852a5c8e9e5bca00502b93e046a4
 URL:		http://fishshell.com/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	doxygen
@@ -33,7 +33,8 @@ nie jest zgodna z innymi językami powłoki.
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
-%configure
+%configure \
+	--disable-silent-rules
 
 %{__make}
 
@@ -43,6 +44,8 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}
+# no -devel package yet
+%{__rm} $RPM_BUILD_ROOT%{_npkgconfigdir}/fish.pc
 
 %find_lang %{name}
 
@@ -60,10 +63,17 @@ end
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc README.md user_doc/html/*.{html,css,png}
-%attr(755,root,root) %{_bindir}/fish*
-%attr(755,root,root) %{_bindir}/mimedb
+%dir %{_sysconfdir}/fish
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish/config.fish
+%attr(755,root,root) %{_bindir}/fish
+%attr(755,root,root) %{_bindir}/fish_indent
+%attr(755,root,root) %{_bindir}/fish_key_reader
+%{_mandir}/man1/fish.1*
+%{_mandir}/man1/fish_indent.1*
+%{_mandir}/man1/fish_key_reader.1*
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/config.fish
+%{_datadir}/%{name}/__fish_build_paths.fish
 %dir %{_datadir}/%{name}/completions
 %{_datadir}/%{name}/completions/..fish
 %{_datadir}/%{name}/completions/*.fish
@@ -76,13 +86,10 @@ end
 %{_datadir}/%{name}/tools/deroff.py
 %dir %{_datadir}/%{name}/tools/web_config
 %{_datadir}/%{name}/tools/web_config/delete.png
+%{_datadir}/%{name}/tools/web_config/favicon.png
 %{_datadir}/%{name}/tools/web_config/fishconfig.css
 %{_datadir}/%{name}/tools/web_config/index.html
 %{_datadir}/%{name}/tools/web_config/js
 %{_datadir}/%{name}/tools/web_config/partials
 %{_datadir}/%{name}/tools/web_config/sample_prompts
 %attr(755,root,root) %{_datadir}/%{name}/tools/web_config/webconfig.py
-%dir %{_sysconfdir}/fish
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish/config.fish
-%{_mandir}/man1/fish*.1*
-%{_mandir}/man1/mimedb.1*
