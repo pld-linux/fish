@@ -1,12 +1,12 @@
 Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
-Version:	2.3.1
+Version:	2.6.0
 Release:	1
 License:	GPL v2
 Group:		Applications/Shells
 Source0:	http://fishshell.com/files/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	2d13852a5c8e9e5bca00502b93e046a4
+# Source0-md5:	ce9d8cc2a34d172a94cfa3ef9988937c
 URL:		http://fishshell.com/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	doxygen
@@ -33,10 +33,9 @@ nie jest zgodna z innymi językami powłoki.
 %{__aclocal}
 %{__autoconf}
 %{__autoheader}
-%configure \
-	--disable-silent-rules
+%configure
 
-%{__make}
+%{__make} V=1
 
 %install
 rm -rf $RPM_BUILD_ROOT
