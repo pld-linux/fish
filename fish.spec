@@ -1,12 +1,12 @@
 Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
-Version:	2.6.0
+Version:	3.0.2
 Release:	1
 License:	GPL v2
 Group:		Applications/Shells
-Source0:	http://fishshell.com/files/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	ce9d8cc2a34d172a94cfa3ef9988937c
+Source0:	https://github.com/fish-shell/fish-shell/releases/download/%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	eba358c6c99e596b8633113ff1cd5994
 URL:		http://fishshell.com/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	doxygen
@@ -74,11 +74,13 @@ end
 %{_datadir}/%{name}/config.fish
 %{_datadir}/%{name}/__fish_build_paths.fish
 %dir %{_datadir}/%{name}/completions
-%{_datadir}/%{name}/completions/..fish
 %{_datadir}/%{name}/completions/*.fish
+%dir %{_datadir}/%{name}/groff
+%{_datadir}/%{name}/groff/fish.tmac
 %{_datadir}/%{name}/vendor_completions.d
 %dir %{_datadir}/%{name}/functions
 %{_datadir}/%{name}/functions/*.fish
+%{_datadir}/%{name}/lynx.lss
 %{_datadir}/%{name}/man
 %dir %{_datadir}/%{name}/tools
 %attr(755,root,root) %{_datadir}/%{name}/tools/create_manpage_completions.py
