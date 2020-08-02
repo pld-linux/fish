@@ -29,6 +29,8 @@ nie jest zgodna z innymi językami powłoki.
 %prep
 %setup -q
 
+%{__sed} -i -e '1s,/usr/bin/env python$,%{__python},' share/tools/{deroff.py,create_manpage_completions.py,web_config/webconfig.py}
+
 %build
 %{__aclocal}
 %{__autoconf}
