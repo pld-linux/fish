@@ -26,6 +26,21 @@ fish jest powłoką nastawioną na interaktywne używanie. Jego cechą jest
 przyjazne nastawienie dla użytkownika. Składnia języka jest prosta ale
 nie jest zgodna z innymi językami powłoki.
 
+%package devel
+Summary:	Development files for fish
+Summary(pl.UTF-8):	Pliki programistyczne dla fish
+Group:		Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+%if "%{_rpmversion}" >= "4.6"
+BuildArch:	noarch
+%endif
+
+%description devel
+Development files for fish.
+
+%description devel -l pl.UTF-8
+Pliki programistyczne dla fish.
+
 %prep
 %setup -q
 
@@ -45,8 +60,6 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}
-# no -devel package yet
-%{__rm} $RPM_BUILD_ROOT%{_npkgconfigdir}/fish.pc
 
 %find_lang %{name}
 
@@ -96,3 +109,7 @@ end
 %{_datadir}/%{name}/tools/web_config/partials
 %{_datadir}/%{name}/tools/web_config/sample_prompts
 %attr(755,root,root) %{_datadir}/%{name}/tools/web_config/webconfig.py
+
+%files devel
+%defattr(644,root,root,755)
+%{_npkgconfigdir}/fish.pc
