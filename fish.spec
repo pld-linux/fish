@@ -31,9 +31,7 @@ Summary:	Development files for fish
 Summary(pl.UTF-8):	Pliki programistyczne dla fish
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description devel
 Development files for fish.
