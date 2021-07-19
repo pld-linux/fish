@@ -7,6 +7,7 @@ License:	GPL v2
 Group:		Applications/Shells
 Source0:	https://github.com/fish-shell/fish-shell/releases/download/%{version}/%{name}-%{version}.tar.xz
 # Source0-md5:	94be285255aadfcf0f910bdcc2f56073
+Patch0:		%{name}-no_lld.patch
 URL:		http://fishshell.com/
 BuildRequires:	cmake >= 3.2
 BuildRequires:	gettext-tools
@@ -46,6 +47,7 @@ Pliki programistyczne dla fish.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %{__sed} -i -e '1s,/usr/bin/env python$,%{__python},' share/tools/{deroff.py,create_manpage_completions.py,web_config/webconfig.py}
 
