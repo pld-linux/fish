@@ -1,18 +1,23 @@
 Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
-Version:	3.0.2
+Version:	3.3.1
 Release:	1
 License:	GPL v2
 Group:		Applications/Shells
-Source0:	https://github.com/fish-shell/fish-shell/releases/download/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	eba358c6c99e596b8633113ff1cd5994
+Source0:	https://github.com/fish-shell/fish-shell/releases/download/%{version}/%{name}-%{version}.tar.xz
+# Source0-md5:	94be285255aadfcf0f910bdcc2f56073
 URL:		http://fishshell.com/
-BuildRequires:	autoconf >= 2.60
-BuildRequires:	doxygen
+BuildRequires:	cmake >= 3.2
 BuildRequires:	gettext-tools
+BuildRequires:	libstdc++-devel >= 6:4.8.1
 BuildRequires:	ncurses-devel
-BuildRequires:	rpmbuild(macros) >= 1.462
+BuildRequires:	pcre2-32-devel >= 10.21
+BuildRequires:	rpmbuild(macros) >= 1.605
+BuildRequires:	sphinx-pdg
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
+Requires:	pcre2-32 >= 10.21
 Suggests:	python
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -45,19 +50,16 @@ Pliki programistyczne dla fish.
 %{__sed} -i -e '1s,/usr/bin/env python$,%{__python},' share/tools/{deroff.py,create_manpage_completions.py,web_config/webconfig.py}
 
 %build
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%configure
+%cmake -B build
 
-%{__make} V=1
+%{__make} -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}
 
 %find_lang %{name}
 
@@ -74,7 +76,7 @@ end
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc README.md user_doc/html/*.{html,css,png}
+%doc CHANGELOG.rst CONTRIBUTING.rst README.rst user_doc/html/{*.html,*.js,cmds,_static}
 %dir %{_sysconfdir}/fish
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish/config.fish
 %attr(755,root,root) %{_bindir}/fish
