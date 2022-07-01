@@ -2,7 +2,7 @@ Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
 Version:	3.3.1
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Applications/Shells
 Source0:	https://github.com/fish-shell/fish-shell/releases/download/%{version}/%{name}-%{version}.tar.xz
@@ -37,7 +37,6 @@ nie jest zgodna z innymi językami powłoki.
 Summary:	Development files for fish
 Summary(pl.UTF-8):	Pliki programistyczne dla fish
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
 BuildArch:	noarch
 
 %description devel
