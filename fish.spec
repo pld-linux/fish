@@ -15,6 +15,7 @@ BuildRequires:	gettext-tools
 BuildRequires:	libstdc++-devel >= 6:4.8.1
 BuildRequires:	ncurses-devel
 BuildRequires:	pcre2-32-devel >= 10.21
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	sphinx-pdg
 BuildRequires:	tar >= 1:1.22
