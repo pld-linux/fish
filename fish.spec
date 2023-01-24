@@ -2,7 +2,7 @@ Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
 Version:	3.3.1
-Release:	3
+Release:	4
 License:	GPL v2
 Group:		Applications/Shells
 Source0:	https://github.com/fish-shell/fish-shell/releases/download/%{version}/%{name}-%{version}.tar.xz
@@ -96,7 +96,6 @@ end
 %{_datadir}/%{name}/completions/*.fish
 %dir %{_datadir}/%{name}/groff
 %{_datadir}/%{name}/groff/fish.tmac
-%{_datadir}/%{name}/vendor_completions.d
 %dir %{_datadir}/%{name}/functions
 %{_datadir}/%{name}/functions/*.fish
 %{_datadir}/%{name}/lynx.lss
@@ -113,6 +112,9 @@ end
 %{_datadir}/%{name}/tools/web_config/partials
 %{_datadir}/%{name}/tools/web_config/sample_prompts
 %attr(755,root,root) %{_datadir}/%{name}/tools/web_config/webconfig.py
+%dir %{_datadir}/%{name}/vendor_completions.d
+%dir %{_datadir}/%{name}/vendor_conf.d
+%dir %{_datadir}/%{name}/vendor_functions.d
 
 %files devel
 %defattr(644,root,root,755)
