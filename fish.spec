@@ -1,14 +1,12 @@
 Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
-Version:	3.3.1
-Release:	4
+Version:	3.6.4
+Release:	1
 License:	GPL v2
 Group:		Applications/Shells
 Source0:	https://github.com/fish-shell/fish-shell/releases/download/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	94be285255aadfcf0f910bdcc2f56073
-Patch0:		%{name}-no_lld.patch
-Patch1:		%{name}-rel_datadir.patch
+# Source0-md5:	600c5d8ffa45b1d73b5263809cb5e6f5
 URL:		http://fishshell.com/
 BuildRequires:	cmake >= 3.2
 BuildRequires:	gettext-tools
@@ -48,10 +46,8 @@ Pliki programistyczne dla fish.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
 
-%{__sed} -i -e '1s,/usr/bin/env python$,%{__python},' share/tools/{deroff.py,create_manpage_completions.py,web_config/webconfig.py}
+%{__sed} -i -e '1s,/usr/bin/env python3$,%{__python3},' share/tools/create_manpage_completions.py
 
 %build
 %cmake -B build
@@ -98,7 +94,6 @@ end
 %{_datadir}/%{name}/groff/fish.tmac
 %dir %{_datadir}/%{name}/functions
 %{_datadir}/%{name}/functions/*.fish
-%{_datadir}/%{name}/lynx.lss
 %{_datadir}/%{name}/man
 %dir %{_datadir}/%{name}/tools
 %attr(755,root,root) %{_datadir}/%{name}/tools/create_manpage_completions.py
@@ -111,6 +106,7 @@ end
 %{_datadir}/%{name}/tools/web_config/js
 %{_datadir}/%{name}/tools/web_config/partials
 %{_datadir}/%{name}/tools/web_config/sample_prompts
+%{_datadir}/%{name}/tools/web_config/themes
 %attr(755,root,root) %{_datadir}/%{name}/tools/web_config/webconfig.py
 %dir %{_datadir}/%{name}/vendor_completions.d
 %dir %{_datadir}/%{name}/vendor_conf.d
