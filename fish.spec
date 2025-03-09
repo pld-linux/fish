@@ -1,25 +1,27 @@
 Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
-Version:	3.6.4
-Release:	1
+Version:	4.0.0
+Release:	0.1
 License:	GPL v2
 Group:		Applications/Shells
 Source0:	https://github.com/fish-shell/fish-shell/releases/download/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	600c5d8ffa45b1d73b5263809cb5e6f5
+# Source0-md5:	25e3f6b0317f655d23155ec86474cdfc
 URL:		http://fishshell.com/
+BuildRequires:	cargo
 BuildRequires:	cmake >= 3.2
 BuildRequires:	gettext-tools
 BuildRequires:	libstdc++-devel >= 6:4.8.1
-BuildRequires:	ncurses-devel
 BuildRequires:	pcre2-32-devel >= 10.21
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.605
+BuildRequires:	rust
 BuildRequires:	sphinx-pdg
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	terminfo
 BuildRequires:	xz
 Requires:	pcre2-32 >= 10.21
-Suggests:	python
+Suggests:	python3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -50,7 +52,9 @@ Pliki programistyczne dla fish.
 %{__sed} -i -e '1s,/usr/bin/env python3$,%{__python3},' share/tools/create_manpage_completions.py
 
 %build
-%cmake -B build
+%{__cmake} -B build \
+	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+	-DCMAKE_INSTALL_SYSCONFDIR=%{_sysconfdir}
 
 %{__make} -C build
 
@@ -82,6 +86,14 @@ end
 %attr(755,root,root) %{_bindir}/fish
 %attr(755,root,root) %{_bindir}/fish_indent
 %attr(755,root,root) %{_bindir}/fish_key_reader
+%{_mandir}/man1/fish-completions.1*
+%{_mandir}/man1/fish-doc.1*
+%{_mandir}/man1/fish-faq.1*
+%{_mandir}/man1/fish-for-bash-users.1*
+%{_mandir}/man1/fish-interactive.1*
+%{_mandir}/man1/fish-language.1*
+%{_mandir}/man1/fish-prompt-tutorial.1*
+%{_mandir}/man1/fish-tutorial.1*
 %{_mandir}/man1/fish.1*
 %{_mandir}/man1/fish_indent.1*
 %{_mandir}/man1/fish_key_reader.1*
@@ -90,6 +102,7 @@ end
 %{_datadir}/%{name}/__fish_build_paths.fish
 %dir %{_datadir}/%{name}/completions
 %{_datadir}/%{name}/completions/*.fish
+%{_datadir}/fish/completions/..fish
 %dir %{_datadir}/%{name}/groff
 %{_datadir}/%{name}/groff/fish.tmac
 %dir %{_datadir}/%{name}/functions
@@ -99,14 +112,15 @@ end
 %attr(755,root,root) %{_datadir}/%{name}/tools/create_manpage_completions.py
 %{_datadir}/%{name}/tools/deroff.py
 %dir %{_datadir}/%{name}/tools/web_config
-%{_datadir}/%{name}/tools/web_config/delete.png
 %{_datadir}/%{name}/tools/web_config/favicon.png
 %{_datadir}/%{name}/tools/web_config/fishconfig.css
+%{_datadir}/%{name}/tools/web_config/fishconfig_print.css
 %{_datadir}/%{name}/tools/web_config/index.html
 %{_datadir}/%{name}/tools/web_config/js
-%{_datadir}/%{name}/tools/web_config/partials
 %{_datadir}/%{name}/tools/web_config/sample_prompts
 %{_datadir}/%{name}/tools/web_config/themes
+%{_desktopdir}/fish.desktop
+%{_pixmapsdir}/fish.png
 %attr(755,root,root) %{_datadir}/%{name}/tools/web_config/webconfig.py
 %dir %{_datadir}/%{name}/vendor_completions.d
 %dir %{_datadir}/%{name}/vendor_conf.d
