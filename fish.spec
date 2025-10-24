@@ -11,7 +11,7 @@ Source1:	vendor.tar.zst
 # Source1-md5:	4524ed43b1e3c069077cb21f9da627b8
 URL:		http://fishshell.com/
 BuildRequires:	cargo
-BuildRequires:	cmake >= 3.2
+BuildRequires:	cmake >= 3.15
 BuildRequires:	gettext-tools
 BuildRequires:	pcre2-32-devel >= 10.21
 BuildRequires:	rpm-build >= 4.6
