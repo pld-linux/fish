@@ -13,7 +13,6 @@ URL:		http://fishshell.com/
 BuildRequires:	cargo
 BuildRequires:	cmake >= 3.2
 BuildRequires:	gettext-tools
-BuildRequires:	libstdc++-devel >= 6:4.8.1
 BuildRequires:	pcre2-32-devel >= 10.21
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 2.020
