@@ -22,7 +22,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	terminfo
 BuildRequires:	xz
 BuildRequires:	zstd
-%rust_req
+%{?rust_req}
 Requires:	pcre2-32 >= 10.21
 Requires:       awk
 Requires:       bc
