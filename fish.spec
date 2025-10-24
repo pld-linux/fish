@@ -1,12 +1,14 @@
 Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
-Version:	4.0.0
+Version:	4.0.6
 Release:	0.1
 License:	GPL v2
 Group:		Applications/Shells
 Source0:	https://github.com/fish-shell/fish-shell/releases/download/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	25e3f6b0317f655d23155ec86474cdfc
+# Source0-md5:	33abf3cfaa592a43b4823b8ff46d5246
+Source1:	vendor.tar.zst
+# Source1-md5:	4524ed43b1e3c069077cb21f9da627b8
 URL:		http://fishshell.com/
 BuildRequires:	cargo
 BuildRequires:	cmake >= 3.2
@@ -21,6 +23,10 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	terminfo
 BuildRequires:	xz
 Requires:	pcre2-32 >= 10.21
+Requires:       awk
+Requires:       bc
+Requires:       gzip
+Requires:       man
 Suggests:	python3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -47,7 +53,7 @@ Development files for fish.
 Pliki programistyczne dla fish.
 
 %prep
-%setup -q
+%setup -q -a1
 
 %{__sed} -i -e '1s,/usr/bin/env python3$,%{__python3},' share/tools/create_manpage_completions.py
 
