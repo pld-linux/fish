@@ -16,7 +16,7 @@ BuildRequires:	gettext-tools
 BuildRequires:	libstdc++-devel >= 6:4.8.1
 BuildRequires:	pcre2-32-devel >= 10.21
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.605
+BuildRequires:	rpmbuild(macros) >= 2.020
 BuildRequires:	rust
 BuildRequires:	sphinx-pdg
 BuildRequires:	tar >= 1:1.22
@@ -58,14 +58,17 @@ Pliki programistyczne dla fish.
 %{__sed} -i -e '1s,/usr/bin/env python3$,%{__python3},' share/tools/create_manpage_completions.py
 
 %build
-%{__cmake} -B build \
-	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
-	-DCMAKE_INSTALL_SYSCONFDIR=%{_sysconfdir}
+%cmake -B build \
+	-DRust_COMPILER:PATH="%{__rustc}" \
+	-DRust_CARGO:PATH="%{__cargo}" \
+	-DRust_CARGO_TARGET="%{rust_target}" \
+	-DCARGO_FLAGS:LIST="%(printf '%s' '%__cargo_common_opts --release' | tr '[[:space:]]' ';')"
 
 %{__make} -C build
 
 %install
 rm -rf $RPM_BUILD_ROOT
+%{set_build_flags};
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
