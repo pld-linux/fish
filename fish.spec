@@ -15,12 +15,13 @@ BuildRequires:	cmake >= 3.15
 BuildRequires:	gettext-tools
 BuildRequires:	pcre2-32-devel >= 10.21
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 2.020
+BuildRequires:	rpmbuild(macros) >= 2.050
 BuildRequires:	rust
 BuildRequires:	sphinx-pdg
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	terminfo
 BuildRequires:	xz
+%rust_req
 Requires:	pcre2-32 >= 10.21
 Requires:       awk
 Requires:       bc
