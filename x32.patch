@@ -1,0 +1,17 @@
+--- fish-4.0.6/src/env_universal_common.rs.orig	2025-09-12 11:47:41.000000000 +0200
++++ fish-4.0.6/src/env_universal_common.rs	2025-10-24 21:42:50.152263763 +0200
+@@ -800,7 +800,14 @@
+         #[cfg(any(target_os = "linux", target_os = "android"))]
+         {
+             let mut times: [libc::timespec; 2] = unsafe { std::mem::zeroed() };
++            #[cfg(not(all(target_arch = "x86_64", target_pointer_width = "32")))]
++            {
+             times[0].tv_nsec = libc::UTIME_OMIT; // don't change ctime
++            }
++            #[cfg(all(target_arch = "x86_64", target_pointer_width = "32"))]
++            {
++            times[0].tv_nsec = libc::UTIME_OMIT as i64; // don't change ctime
++            }
+             if unsafe { libc::clock_gettime(libc::CLOCK_REALTIME, &mut times[1]) } == 0 {
+                 unsafe {
+                     libc::futimens(private_fd.as_raw_fd(), &times[0]);

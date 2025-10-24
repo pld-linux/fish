@@ -9,6 +9,7 @@ Source0:	https://github.com/fish-shell/fish-shell/releases/download/%{version}/%
 # Source0-md5:	33abf3cfaa592a43b4823b8ff46d5246
 Source1:	vendor.tar.zst
 # Source1-md5:	4524ed43b1e3c069077cb21f9da627b8
+Patch0:		x32.patch
 URL:		http://fishshell.com/
 BuildRequires:	cargo
 BuildRequires:	cmake >= 3.15
@@ -55,6 +56,7 @@ Pliki programistyczne dla fish.
 
 %prep
 %setup -q -a1
+%patch -P0 -p1
 
 %{__sed} -i -e '1s,/usr/bin/env python3$,%{__python3},' share/tools/create_manpage_completions.py
 
