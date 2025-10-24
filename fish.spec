@@ -62,7 +62,8 @@ Pliki programistyczne dla fish.
 	-DRust_COMPILER:PATH="%{__rustc}" \
 	-DRust_CARGO:PATH="%{__cargo}" \
 	-DRust_CARGO_TARGET="%{rust_target}" \
-	-DCARGO_FLAGS:LIST="%(printf '%s' '%__cargo_common_opts --release' | tr '[[:space:]]' ';')"
+	-DCARGO_FLAGS:LIST="%(printf '%s' '%__cargo_common_opts --release' | tr '[[:space:]]' ';')" \
+	-DFISH_USE_SYSTEM_PCRE2:BOOL=ON
 
 %{__make} -C build
 
