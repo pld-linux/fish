@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	doc		# build documentation
+
 Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
@@ -18,7 +22,7 @@ BuildRequires:	pcre2-32-devel >= 10.21
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 2.050
 BuildRequires:	rust
-BuildRequires:	sphinx-pdg
+%{?with_doc:BuildRequires:	sphinx-pdg}
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	terminfo
 BuildRequires:	xz
@@ -78,7 +82,8 @@ Dokumentacja dla fish.
 	-DRust_CARGO:PATH="%{__cargo}" \
 	-DRust_CARGO_TARGET="%{rust_target}" \
 	-DCARGO_FLAGS:LIST="%(printf '%s' '%__cargo_common_opts --release' | tr '[[:space:]]' ';')" \
-	-DFISH_USE_SYSTEM_PCRE2:BOOL=ON
+	-DFISH_USE_SYSTEM_PCRE2:BOOL=ON \
+	-DBUILD_DOCS:BOOL=%{__ON_OFF doc}
 
 %{__make} -C build
 
@@ -155,6 +160,8 @@ end
 %defattr(644,root,root,755)
 %{_npkgconfigdir}/fish.pc
 
+%if %{with doc}
 %files doc
 %defattr(644,root,root,755)
 %doc build/user_doc/html/{*.html,*.js,cmds,_static}
+%endif
