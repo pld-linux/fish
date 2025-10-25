@@ -2,7 +2,7 @@ Summary:	fish - A friendly interactive shell
 Summary(pl.UTF-8):	fish - przyjazna interaktywna powłoka
 Name:		fish
 Version:	4.0.6
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Shells
 Source0:	https://github.com/fish-shell/fish-shell/releases/download/%{version}/%{name}-%{version}.tar.xz
@@ -28,7 +28,7 @@ Requires:	pcre2-32 >= 10.21
 Requires:       awk
 Requires:       bc
 Requires:       gzip
-Requires:       man
+Requires:       man-db
 Suggests:	python3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
