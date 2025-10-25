@@ -54,6 +54,18 @@ Development files for fish.
 %description devel -l pl.UTF-8
 Pliki programistyczne dla fish.
 
+%package doc
+Summary:	Documentation for fish
+Summary(pl.UTF-8):	Dokumentacja dla fish
+Group:		Documentation
+BuildArch:	noarch
+
+%description doc
+Documentation for fish.
+
+%description doc -l pl.UTF-8
+Dokumentacja dla fish.
+
 %prep
 %setup -q -a1
 %patch -P0 -p1
@@ -93,7 +105,7 @@ end
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc CHANGELOG.rst CONTRIBUTING.rst README.rst user_doc/html/{*.html,*.js,cmds,_static}
+%doc CHANGELOG.rst CONTRIBUTING.rst README.rst
 %dir %{_sysconfdir}/fish
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/fish/config.fish
 %attr(755,root,root) %{_bindir}/fish
@@ -142,3 +154,7 @@ end
 %files devel
 %defattr(644,root,root,755)
 %{_npkgconfigdir}/fish.pc
+
+%files doc
+%defattr(644,root,root,755)
+%doc build/user_doc/html/{*.html,*.js,cmds,_static}
